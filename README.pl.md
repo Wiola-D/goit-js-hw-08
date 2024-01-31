@@ -24,6 +24,7 @@ skonfigurowania dodatkowych opcji [zobacz dokumentację](https://parceljs.org/)
 - Wszystkie partiale plików stylów powinny znajdować się w folderze `src/sass` i
   importować się w pliki stylów stron. Na przykład dla `index.html` plik stylów
   nazywa się `index.scss`.
+
 - Obrazy dodawaj do pliku `src/images`. Moduł zbierający optymalizuje je, ale
   tylko przy deploymencie wersji produkcyjnej projektu. Wszystko to zachodzi w
   chmurze, aby nie obciążać twojego komputera, ponieważ na słabszym sprzęcie
