@@ -1,5 +1,33 @@
 var throttle = require('lodash.throttle');
-/*jQuery(form).on('input', _.throttle(updatePosition, 500));*/
+
+const form = document.querySelector('.feedback-form');
+const localStorageKey = 'feedback-form-state';
+const emailInput = form.querySelector('input[name="email"]');
+const messageInput = form.querySelector('textarea[name="message"]');
+
+form.addEventListener(
+  'input',
+  throttle(() => {
+    const formState = {
+      email: emailInput.value,
+      message: messageInput.value,
+    };
+    localStorage.setItem(localStorageKey, JSON.stringify(formState));
+  }, 500)
+);
+
+const parsedFormState = JSON.parse(localStorage.getItem(localStorageKey));
+
+emailInput.value = parsedFormState.email;
+messageInput.value = parsedFormState.message;
+
+form.addEventListener('submit', e => {
+  localStorage.removeItem(localStorageKey);
+  form.reset();
+});
+
+/*
+imprt throttle from 'lodash.trhrottle';
 
 const form = document.querySelector('.feedback-form');
 const localStorageKeyEmail = 'feedback-form-state-email';
@@ -22,4 +50,4 @@ form.addEventListener('submit', event => {
   localStorage.removeItem(localStorageKeyEmail);
   localStorage.removeItem(localStorageKeyMessage);
   form.reset();
-});
+}); */
