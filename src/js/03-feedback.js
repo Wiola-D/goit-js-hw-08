@@ -18,36 +18,19 @@ form.addEventListener(
 
 const parsedFormState = JSON.parse(localStorage.getItem(localStorageKey));
 
-emailInput.value = parsedFormState.email;
-messageInput.value = parsedFormState.message;
-
+if (parsedFormState) {
+  emailInput.value = parsedFormState.email;
+  messageInput.value = parsedFormState.message;
+}
 form.addEventListener('submit', e => {
+  e.preventDefault();
+  if (emailInput.value.trim() === '' || messageInput.value.trim() === '') {
+    return alert('Wszystkie pola powinny zostać wypełnione!');
+  }
   localStorage.removeItem(localStorageKey);
+  console.log('Formularz wysłany z danymi:', {
+    email: emailInput.value,
+    message: messageInput.value,
+  });
   form.reset();
 });
-
-/*
-imprt throttle from 'lodash.trhrottle';
-
-const form = document.querySelector('.feedback-form');
-const localStorageKeyEmail = 'feedback-form-state-email';
-const localStorageKeyMessage = 'feedback-form-state-message';
-
-form.elements.message.value =
-  localStorage.getItem(localStorageKeyMessage) ?? '';
-
-form.elements.email.value = localStorage.getItem(localStorageKeyEmail) ?? '';
-
-form.email.addEventListener('input', evt => {
-  localStorage.setItem(localStorageKeyEmail, evt.target.value);
-});
-form.message.addEventListener('input', evt => {
-  localStorage.setItem(localStorageKeyMessage, evt.target.value);
-});
-
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  localStorage.removeItem(localStorageKeyEmail);
-  localStorage.removeItem(localStorageKeyMessage);
-  form.reset();
-}); */
