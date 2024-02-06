@@ -16,6 +16,6 @@ player.on(
 
 const timeUpgrade = localStorage.getItem('videoplayer-current-time');
 
-if (timeupdate) {
+if (timeUpgrade) {
   player.setCurrentTime(timeUpgrade);
 }
